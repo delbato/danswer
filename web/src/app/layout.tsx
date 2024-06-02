@@ -3,6 +3,8 @@ import "./globals.css";
 
 import { Inter } from "next/font/google";
 import { SettingsProvider } from "@/components/settings/SettingsProvider";
+import { NextIntlClientProvider } from "next-intl";
+import { getMessages } from "next-intl/server";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -22,6 +24,7 @@ export default async function RootLayout({
   children: React.ReactNode;
 }) {
   const combinedSettings = await fetchSettingsSS();
+  const messages = await getMessages();
 
   return (
     <html lang="en">
@@ -31,9 +34,11 @@ export default async function RootLayout({
           process.env.THEME_IS_DARK?.toLowerCase() === "true" ? "dark" : ""
         }`}
       >
-        <SettingsProvider settings={combinedSettings}>
-          {children}
-        </SettingsProvider>
+        <NextIntlClientProvider messages={messages}>
+          <SettingsProvider settings={combinedSettings}>
+            {children}
+          </SettingsProvider>
+        </NextIntlClientProvider>
       </body>
     </html>
   );

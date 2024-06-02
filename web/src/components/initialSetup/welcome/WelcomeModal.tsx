@@ -13,6 +13,7 @@ import { ApiKeyForm } from "@/components/llm/ApiKeyForm";
 import { WellKnownLLMProviderDescriptor } from "@/app/admin/models/llm/interfaces";
 import { checkLlmProvider } from "./lib";
 import { User } from "@/lib/types";
+import { useTranslations } from "next-intl";
 
 function setWelcomeFlowComplete() {
   Cookies.set(COMPLETED_WELCOME_FLOW_COOKIE, "true", { expires: 365 });
@@ -64,6 +65,8 @@ export function _WelcomeModal({ user }: { user: User | null }) {
   const [providerOptions, setProviderOptions] = useState<
     WellKnownLLMProviderDescriptor[]
   >([]);
+
+  const t = useTranslations();
 
   useEffect(() => {
     async function fetchProviderInfo() {
@@ -215,36 +218,33 @@ export function _WelcomeModal({ user }: { user: User | null }) {
       );
       break;
     default:
-      title = "🎉 Welcome to Danswer";
+      title = t("welcome.modal.title");
       body = (
         <>
           <div>
-            <Text>How are you planning on using Danswer?</Text>
+            <Text>{t("welcome.modal.question")}</Text>
           </div>
           <Divider />
           <UsageTypeSection
-            title="Search / Chat with Knowledge"
+            title={t("welcome.modal.search_title")}
             description={
               <Text>
-                If you&apos;re looking to search through, chat with, or ask
-                direct questions of your organization&apos;s knowledge, then
-                this is the option for you!
+                {t("welcome.modal.search_text")}
               </Text>
             }
-            callToAction="Get Started"
+            callToAction={t("common.get_started")}
             onClick={() => setSelectedFlow("search")}
           />
           <Divider />
           <UsageTypeSection
-            title="Secure ChatGPT"
+            title={t("welcome.modal.chat_title")}
             description={
               <Text>
-                If you&apos;re looking for a pure ChatGPT-like experience, then
-                this is the option for you!
+                {t("welcome.modal.chat_text")}
               </Text>
             }
             icon={FiMessageSquare}
-            callToAction="Get Started"
+            callToAction={t("common.get_started")}
             onClick={() => {
               setSelectedFlow("chat");
             }}

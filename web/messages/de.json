@@ -1,0 +1,15 @@
+{
+    "common": {
+        "get_started": "Los gehts"
+    },
+    "welcome": {
+        "modal": {
+            "title": "🎉 Willkommen bei Danswer",
+            "question": "Wie willst du Danswer nutzen?",
+            "search_title": "Suchen / Chatten",
+            "chat_text": "Wenn du nach einer puren ChatGPT-Experience suchst, bist du hier richtig!",
+            "chat_title": "Sicheres ChatGPT",
+            "search_text": "Wenn du vor hast, eine Company Knowledgebase zu durchsuchen, bist du hier richtig!"
+        }
+    }
+}
